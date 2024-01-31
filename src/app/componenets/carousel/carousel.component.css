@@ -1,0 +1,32 @@
+.carousel-inner
+{
+  height: 700px;
+}
+
+.carousel-inner .carousel-item img
+{
+  height: 700px;
+  object-fit: cover;
+}
+
+.carousel-caption h2
+{
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: sans-serif;
+
+}
+
+.carousel-caption p
+{
+  color: #ffffff;
+  font-family: sans-serif;
+
+}
+
+.info {
+  color: rgb(180, 180, 180);
+  font-family: sans-serif;
+}
+

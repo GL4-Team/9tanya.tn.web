@@ -1,0 +1,18 @@
+<div class="movie-item"  [routerLink]="['/movie', movieId]">
+  <!-- Average rate on top corner -->
+  <div class="average-rate">
+    <span style="display: flex; align-items: center; padding: 8px;">
+      <i class="material-icons" style="font-size: 16px; color: #ffae00;">star</i>
+      <span style="margin-left: 4px; color: white; font-size: 15px;">{{(movie?.vote_average ?? 0) | twoDigits }}</span>
+    </span>
+  </div>
+  <!-- Movie image -->
+  <div class="image-wrapper">
+    <img [src]="imageUrl" class="rowimg largeposter" alt="..." >
+  </div>
+  <!-- Hover content -->
+  <div class="hover-content" >
+    <p id="title">{{ movie?.title }}</p>
+    <p id="date">{{ movie?.release_date | date}}</p>
+  </div>
+</div>

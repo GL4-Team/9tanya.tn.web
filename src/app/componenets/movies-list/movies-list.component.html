@@ -1,0 +1,11 @@
+<div class="rowposter mt-3 p-2">
+  <button class="arrow prev" (click)="slide('left')"  >&#10094;</button>
+  <div class="slider-container">
+    <div class="slider" [ngStyle]="{'transform': 'translateX(' + slidePosition + 'px)'}">
+      <ng-container *ngFor="let movie of movies">
+        <app-movie-item [imageUrl]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" [movieId]="movie.id!"></app-movie-item>
+      </ng-container>
+    </div>
+  </div>
+  <button class="arrow next" (click)="slide('right')">&#10095;</button>
+</div>

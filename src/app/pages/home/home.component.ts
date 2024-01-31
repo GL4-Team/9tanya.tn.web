@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import{MovieApiServiceService} from "../../service/movie-api-service.service";
+import{MovieApiService} from "../../service/movie-api.service";
 
 @Component({
   selector: 'app-home',
@@ -7,27 +7,20 @@ import{MovieApiServiceService} from "../../service/movie-api-service.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  constructor(private service:MovieApiServiceService) {}
+  constructor(private service:MovieApiService) {}
   bannerResult:any=[]
   trendingMovieResult:any=[]
-  actionMovieResult: any = [];
-  adventureMovieResult: any = [];
-  animationMovieResult: any = [];
-  comedyMovieResult: any = [];
-  documentaryMovieResult: any = [];
-  sciencefictionMovieResult: any = [];
-  thrillerMovieResult: any = [];
+  upcomingMovieResult:any=[]
+  nowPlayingMovieResult:any=[]
+
 
   ngOnInit(): void {
     this.bannerData();
     this.trendingData();
-    this.actionMovie();
-    this.adventureMovie();
-    this.comedyMovie();
-    this.animationMovie();
-    this.documentaryMovie();
-    this.sciencefictionMovie();
-    this.thrillerMovie();
+    this.upcomingData();
+    this.nowPlayingData();
+
+
   }
   bannerData(){
     this.service.bannerApiData().subscribe((result)=>{
@@ -35,6 +28,7 @@ export class HomeComponent implements OnInit{
       this.bannerResult=result.results;
     });
   }
+
   trendingData(){
     this.service.tredingMovieApiData().subscribe((result)=>{
       console.log(result,'trendingresult#');
@@ -42,46 +36,20 @@ export class HomeComponent implements OnInit{
     })
   }
 
-  actionMovie() {
-    this.service.fetchActionMovies().subscribe((result) => {
-      this.actionMovieResult = result.results;
-    });
+  upcomingData(){
+    this.service.upcomingMovieApiData().subscribe((result)=>{
+      console.log(result,'upcomingresult#');
+      this.upcomingMovieResult=result.results;
+    })
   }
 
-  adventureMovie() {
-    this.service.fetchAdventureMovies().subscribe((result) => {
-      this.adventureMovieResult = result.results;
-    });
+  nowPlayingData(){
+    this.service.nowPlayingMovieApiData().subscribe((result)=>{
+      console.log(result,'nowplayingresult#');
+      this.nowPlayingMovieResult=result.results;
+    })
   }
 
-  animationMovie() {
-    this.service.fetchAnimationMovies().subscribe((result) => {
-      this.animationMovieResult = result.results;
-    });
-  }
 
-  comedyMovie() {
-    this.service.fetchComedyMovies().subscribe((result) => {
-      this.comedyMovieResult = result.results;
-    });
-  }
-
-  documentaryMovie() {
-    this.service.fetchDocumentaryMovies().subscribe((result) => {
-      this.documentaryMovieResult = result.results;
-    });
-  }
-
-  sciencefictionMovie() {
-    this.service.fetchScienceFictionMovies().subscribe((result) => {
-      this.sciencefictionMovieResult = result.results;
-    });
-  }
-
-  thrillerMovie() {
-    this.service.fetchThrillerMovies().subscribe((result) => {
-      this.thrillerMovieResult = result.results;
-    });
-  }
 
 }

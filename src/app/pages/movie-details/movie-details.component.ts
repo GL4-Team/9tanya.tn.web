@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MovieApiServiceService} from "../../service/movie-api-service.service";
+import {MovieApiService} from "../../service/movie-api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailsComponent implements OnInit{
-  constructor(private service:MovieApiServiceService, private activatedRoute:ActivatedRoute) {
+  constructor(private service:MovieApiService, private activatedRoute:ActivatedRoute) {
   }
   getMovieDetailResult:any;
   getMovieVideoResult:any

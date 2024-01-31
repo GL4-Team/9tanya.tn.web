@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {MovieApiServiceService} from "../../service/movie-api-service.service";
+import {MovieApiService} from "../../service/movie-api.service";
 
 @Component({
   selector: 'app-search',
@@ -8,7 +8,7 @@ import {MovieApiServiceService} from "../../service/movie-api-service.service";
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit{
-  constructor(private service :MovieApiServiceService) {
+  constructor(private service :MovieApiService) {
   }
   ngOnInit() {
   }
