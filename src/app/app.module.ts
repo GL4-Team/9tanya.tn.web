@@ -16,7 +16,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MovieItemComponent } from './componenets/movie-item/movie-item.component';
 import { MoviesListComponent } from './componenets/movies-list/movies-list.component';
 import { MoviesCategoryComponent } from './componenets/movies-category/movies-category.component';
-import {AppMovieDialogComponent} from "./componenets/app-movie-dialog/app-movie-dialog.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +28,7 @@ import {AppMovieDialogComponent} from "./componenets/app-movie-dialog/app-movie-
     MovieItemComponent,
     MoviesListComponent,
     MoviesCategoryComponent,
-    AppMovieDialogComponent
+
   ],
   imports: [
     BrowserModule,

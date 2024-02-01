@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "9tanya:build:production"
+              "buildTarget": "9tanya:build:production"
             },
             "development": {
-              "browserTarget": "9tanya:build:development"
+              "buildTarget": "9tanya:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "9tanya:build"
+            "buildTarget": "9tanya:build"
           }
         },
         "test": {
