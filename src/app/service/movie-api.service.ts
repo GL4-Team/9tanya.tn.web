@@ -39,6 +39,13 @@ export class MovieApiService {
       );
   }
 
+  getSimilarMovies(movieId: number): Observable<MovieResponse> {
+    return this.http.get<MovieResponse>(`${this.baseurl}/movie/${movieId}/similar?api_key=${this.apikey}&include_adult=false`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
@@ -53,7 +60,7 @@ export class MovieApiService {
 
   getSearchMovie(data: any): Observable<MovieResponse> {
     console.log(data, 'movie#');
-    return this.http.get<MovieResponse>(`${this.baseurl}/search/movie?api_key=${this.apikey}&query=${data.movieName}`);
+    return this.http.get<MovieResponse>(`${this.baseurl}/search/movie?api_key=${this.apikey}&query=${data.movieName}&include_adult=false`);
   }
 
   getMovieDetails(data:any):Observable<MovieDetailResponse>{

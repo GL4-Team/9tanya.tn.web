@@ -13,7 +13,7 @@ export class MovieItemComponent {
 
   constructor(private service:MovieApiService, private activatedRoute:ActivatedRoute) {
   }
-  movie:MovieDetailResponse | undefined;
+  movie: MovieDetailResponse | undefined;
   @Input() imageUrl!: string;
   @Input() movieId!: number;
 

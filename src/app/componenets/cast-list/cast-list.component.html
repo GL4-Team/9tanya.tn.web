@@ -1,0 +1,15 @@
+<div class="row mt-4">
+  <h5 class="text-white" style="margin-left: 24px; margin-top: 24px ; font-size: 24px ">Cast</h5>
+  <div class="rowposter mt-3 p-2">
+    <button class="arrow prev" (click)="slide('left')"  >&#10094;</button>
+    <div class="slider-container">
+      <div class="slider" [ngStyle]="{'transform': 'translateX(' + slidePosition + 'px)'}">
+        <ng-container *ngFor="let actor of cast">
+          <app-person [actor]="actor"></app-person>
+        </ng-container>
+      </div>
+    </div>
+    <button class="arrow next" (click)="slide('right')">&#10095;</button>
+  </div>
+</div>
+

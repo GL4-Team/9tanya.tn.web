@@ -16,6 +16,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MovieItemComponent } from './componenets/movie-item/movie-item.component';
 import { MoviesListComponent } from './componenets/movies-list/movies-list.component';
 import { MoviesCategoryComponent } from './componenets/movies-category/movies-category.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {AppMovieDialogComponent} from "./componenets/app-movie-dialog/app-movie-dialog.component";
+import {PersonComponent} from "./componenets/person/person.component";
+import {CastListComponent} from "./componenets/cast-list/cast-list.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +32,9 @@ import { MoviesCategoryComponent } from './componenets/movies-category/movies-ca
     MovieItemComponent,
     MoviesListComponent,
     MoviesCategoryComponent,
+    AppMovieDialogComponent,
+    PersonComponent,
+    CastListComponent
 
   ],
   imports: [
@@ -42,7 +49,7 @@ import { MoviesCategoryComponent } from './componenets/movies-category/movies-ca
     FormsModule,
     PipeModule,
   ],
-  providers: [MovieApiService],
+  providers: [MovieApiService, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

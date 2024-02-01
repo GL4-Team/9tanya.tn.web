@@ -1,0 +1,37 @@
+.rowposter {
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-container {
+  display: flex;
+  overflow-x: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.arrow {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 40px; /* Adjust the font size as needed */
+  z-index: 1;
+
+}
+
+.prev {
+  left: 30px;
+}
+
+.next {
+  right: 30px;
+}
+
+.arrow:hover {
+  color: #b4b4b4; /* Change to the desired highlight color */
+}
