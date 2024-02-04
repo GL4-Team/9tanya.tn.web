@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {AppMovieDialogComponent} from "../../componenets/app-movie-dialog/app-movie-dialog.component";
 import {Cast} from "../../models/Cast/cast";
 import {Movie} from "../../models/Movie/movie";
+import {tap} from "rxjs";
 
 
 @Component({
@@ -56,40 +57,64 @@ export class MovieDetailsComponent implements OnInit{
 
 
 
-  getMovie(id:any){
-    this.service.getMovieDetails(id).subscribe((result)=>{
-      console.log(result,'getmoviedetails#')
-      this.movie= result;
-    })
+  getMovie(id: any) {
+    this.service.getMovieDetails(id).pipe(
+      tap(result => console.log(result, 'getmoviedetails#'))
+    ).subscribe({
+      next: (result) => {
+        this.movie = result;
+      },
+      error: (error) => {
+        console.error('Error fetching movie details:', error);
+      }
+    });
+  }
+
+  getVideo(id: any) {
+    this.service.getMovieVideo(id).pipe(
+      tap(result => console.log(result, 'getmovieVideo#'))
+    ).subscribe({
+      next: (result) => {
+        result.results.forEach((element: any) => {
+          if (element.type == "Trailer") {
+            this.video = element.key;
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching movie video:', error);
+      }
+    });
   }
 
 
-  getVideo(id:any)
-  {
-    this.service.getMovieVideo(id).subscribe((result)=>{
-      console.log(result,'getmovieVideo#')
-      result.results.forEach((element:any)=>{
-        if(element.type=="Trailer"){
-          this.video=element.key;
-        }
-      })
-    })
+
+  getMovieCast(id: any) {
+    this.service.getMovieCast(id).pipe(
+      tap(result => console.log(result, 'movieCast#'))
+    ).subscribe({
+      next: (result) => {
+        this.cast = result.cast;
+      },
+      error: (error) => {
+        console.error('Error fetching movie cast:', error);
+      }
+    });
   }
 
-
-
-  getMovieCast(id:any){
-    this.service.getMovieCast(id).subscribe((result)=>{
-      console.log(result,'movieCast#');
-      this.cast=result.cast;
-    })
-  }
 
   private getSimilarMovies(id: any) {
-    this.service.getSimilarMovies(id).subscribe((result)=>{
-      console.log(result,'similar#');
-      this.similarMovies=result.results;
-    })
-
+    this.service.getSimilarMovies(id).pipe(
+      tap(result => console.log(result, 'similar#'))
+    ).subscribe({
+      next: (result) => {
+        this.similarMovies = result.results;
+      },
+      error: (error) => {
+        console.error('Error fetching similar movies:', error);
+      }
+    });
   }
+
+
 }

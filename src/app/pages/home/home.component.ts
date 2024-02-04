@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import{MovieApiService} from "../../service/movie-api.service";
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -22,32 +23,45 @@ export class HomeComponent implements OnInit{
 
 
   }
-  bannerData(){
-    this.service.bannerApiData().subscribe((result)=>{
-      console.log(result,'bannerresult#');
-      this.bannerResult=result.results;
+
+
+  trendingData(){
+    this.service.tredingMovieApiData().pipe(
+      tap(result => console.log(result, 'trendingresult#'))
+    ).subscribe({
+      next: (result) => {
+        this.trendingMovieResult = result.results;
+      },
+      error: (error) => {
+        console.error('Error fetching trending movies:', error);
+      }
     });
   }
 
-  trendingData(){
-    this.service.tredingMovieApiData().subscribe((result)=>{
-      console.log(result,'trendingresult#');
-      this.trendingMovieResult=result.results;
-    })
-  }
-
   upcomingData(){
-    this.service.upcomingMovieApiData().subscribe((result)=>{
-      console.log(result,'upcomingresult#');
-      this.upcomingMovieResult=result.results;
-    })
+    this.service.upcomingMovieApiData().pipe(
+      tap(result => console.log(result, 'upcomingresult#'))
+    ).subscribe({
+      next: (result) => {
+        this.upcomingMovieResult = result.results;
+      },
+      error: (error) => {
+        console.error('Error fetching upcoming movies:', error);
+      }
+    });
   }
 
   nowPlayingData(){
-    this.service.nowPlayingMovieApiData().subscribe((result)=>{
-      console.log(result,'nowplayingresult#');
-      this.nowPlayingMovieResult=result.results;
-    })
+    this.service.nowPlayingMovieApiData().pipe(
+      tap(result => console.log(result, 'nowplayingresult#'))
+    ).subscribe({
+      next: (result) => {
+        this.nowPlayingMovieResult = result.results;
+      },
+      error: (error) => {
+        console.error('Error fetching now playing movies:', error);
+      }
+    });
   }
 
 
