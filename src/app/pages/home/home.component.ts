@@ -23,7 +23,18 @@ export class HomeComponent implements OnInit{
 
 
   }
-
+  bannerData(){
+    this.service.bannerApiData().pipe(
+      tap(result => console.log(result, 'bannerresult#'))
+    ).subscribe({
+      next: (result) => {
+        this.bannerResult = result.results;
+      },
+      error: (error) => {
+        console.error('Error fetching banner data:', error);
+      }
+    });
+  }
 
   trendingData(){
     this.service.tredingMovieApiData().pipe(
