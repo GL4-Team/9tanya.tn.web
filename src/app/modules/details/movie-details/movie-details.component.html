@@ -1,0 +1,99 @@
+<div class="hero" *ngIf="movie">
+  <div class="backdrop">
+    <div class="lazyloaded">
+      <img class="lazyload image" [src]="'https://image.tmdb.org/t/p/original/' + movie.backdrop_path">
+    </div>
+    <div class="info">
+      <div class="banner-title">{{ movie.title }}</div>
+      <div class="tagline"> "{{movie.tagline}}" </div>
+
+    </div>
+
+  </div>
+</div>
+
+<h5 class="text-white" style="margin-left: 32px; font-size: 24px">Overview</h5>
+
+<div class="banner-overview" *ngIf="movie">{{ movie.overview }}</div>
+
+
+<div class="contain mt-5"  *ngIf="movie">
+  <div class="row p-5">
+    <div class="col-lg-2">
+      <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
+    </div>
+    <div class="col-lg-10 mt-5 p-4">
+
+      <div class="stats">
+
+        <ul class="nolist">
+          <li>
+            <div class="label">
+              Released
+            </div>
+            <div class="comma_">
+              {{ movie.release_date | date }}
+            </div>
+          </li>
+          <li>
+            <div class="label">
+              Runtime
+            </div>
+            <div class="comma_">
+              {{ movie.runtime | time }}
+            </div>
+          </li>
+          <li>
+            <div class="label">
+              Budget
+            </div>
+            <div class="comma_">
+              {{ movie.budget | number}}
+            </div>
+          </li>
+          <li>
+            <div class="label">
+              Revenue
+            </div>
+            <div class="comma_">
+              {{ movie.revenue | number }}
+            </div>
+          </li>
+          <li *ngIf="movie?.genres && movie.genres.length">
+            <div class="label">
+              Genre
+            </div>
+            <div class="comma_" *ngFor="let genre of movie.genres">
+              {{ genre?.name }} ,
+            </div>
+          </li>
+          <li *ngIf="movie?.status">
+            <div class="label">
+              Status
+            </div>
+            <div class="comma_">
+              {{movie.status}}
+            </div>
+          </li>
+          <li *ngIf="movie?.spoken_languages && movie.spoken_languages.length">
+            <div class="label">
+              Language
+            </div>
+            <div class="comma_" *ngFor="let language of movie.spoken_languages">
+              {{ language?.name }} ,
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+ <app-cast-list [cast]="cast ? cast : []"></app-cast-list>
+
+<app-movies-category [movies]="similarMovies ? similarMovies : []" [category]="'See more like this'"></app-movies-category>
+
+

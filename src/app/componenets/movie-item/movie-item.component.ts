@@ -1,8 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {MovieApiService} from "../../service/movie-api.service";
+import {MoviesService} from "../../modules/home/service/movies.service";
 import {ActivatedRoute} from "@angular/router";
 import {Movie} from "../../models/Movie/movie";
 import {MovieDetailResponse} from "../../models/Movie-Detail/movie-detail-response";
+import {DetailsService} from "../../modules/details/services/details.service";
 
 @Component({
   selector: 'app-movie-item',
@@ -11,7 +12,7 @@ import {MovieDetailResponse} from "../../models/Movie-Detail/movie-detail-respon
 })
 export class MovieItemComponent {
 
-  constructor(private service:MovieApiService, private activatedRoute:ActivatedRoute) {
+  constructor(private service:DetailsService, private activatedRoute:ActivatedRoute) {
   }
   movie: MovieDetailResponse | undefined;
   @Input() imageUrl!: string;
@@ -29,4 +30,9 @@ export class MovieItemComponent {
       this.movie= result;
     })
   }
+
+  onImageError(event: any) {
+    event.target.src = 'src/assets/images/placeholder.png';
+  }
+
 }

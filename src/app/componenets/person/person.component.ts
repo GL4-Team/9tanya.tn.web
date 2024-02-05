@@ -10,4 +10,7 @@ export class PersonComponent {
 
   @Input() actor!: Cast;
 
+  onImageError(event: any) {
+    event.target.src = 'src/assets/images/default-image.svg';
+  }
 }

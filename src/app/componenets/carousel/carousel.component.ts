@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MovieApiService} from "../../service/movie-api.service";
+import {MoviesService} from "../../modules/home/service/movies.service";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {tap} from "rxjs";
 
@@ -15,7 +15,7 @@ import {tap} from "rxjs";
   ]
 })
 export class CarouselComponent {
-  constructor(private service:MovieApiService) {}
+  constructor(private service:MoviesService) {}
   current = 0;
   bannerResult:any=[]
 

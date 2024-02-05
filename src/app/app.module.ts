@@ -2,64 +2,42 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { SearchComponent } from './pages/search/search.component';
-import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { HomeComponent } from './modules/home/home/home.component';
+import { SearchComponent } from './modules/search/search/search.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { MoviesService } from "./modules/home/service/movies.service";
+import { PipeModule } from "./modules/pipe/pipe.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
+import { DefaultImgDirective } from "./directives/default-img.directive";
+import { ApiKeyInterceptor } from "./interceptor/api-key.interceptor";
+import {HeaderComponent} from "./componenets/header/header.component";
 import {CommonModule} from "@angular/common";
-import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {MovieApiService} from "./service/movie-api.service";
-import { HeaderComponent } from './componenets/header/header.component';
-import { CarouselComponent } from './componenets/carousel/carousel.component';
-import {PipeModule} from "./pipe/pipe.module";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { MovieItemComponent } from './componenets/movie-item/movie-item.component';
-import { MoviesListComponent } from './componenets/movies-list/movies-list.component';
-import { MoviesCategoryComponent } from './componenets/movies-category/movies-category.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {AppMovieDialogComponent} from "./componenets/app-movie-dialog/app-movie-dialog.component";
-import {PersonComponent} from "./componenets/person/person.component";
-import {CastListComponent} from "./componenets/cast-list/cast-list.component";
-import {VideoModalComponent} from "./componenets/video-modal/video-modal.component";
-import {ApiKeyInterceptor} from "./interceptor/api-key.interceptor";
-import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    SearchComponent,
-    MovieDetailsComponent,
     HeaderComponent,
-    CarouselComponent,
-    MovieItemComponent,
-    MoviesListComponent,
-    MoviesCategoryComponent,
-    AppMovieDialogComponent,
-    PersonComponent,
-    CastListComponent,
-    VideoModalComponent,
-
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserModule,
-    AppRoutingModule,
+    CommonModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
     PipeModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot()
   ],
-  providers: [MovieApiService, provideAnimationsAsync(),{
-    provide: HTTP_INTERCEPTORS,
-    useClass: ApiKeyInterceptor,
-    multi: true
-  }],
+  providers: [
+    MoviesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiKeyInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

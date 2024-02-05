@@ -21,7 +21,7 @@ export class MoviesListComponent {
   }
 
   get sliderWidth(): number {
-    return this.movies.length * this.elementWidth;
+    return this.movies.length * this.elementWidth ;
   }
 
   slide(direction: string) {
