@@ -7,7 +7,7 @@ import { SearchComponent } from './pages/search/search.component';
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MovieApiService} from "./service/movie-api.service";
 import { HeaderComponent } from './componenets/header/header.component';
 import { CarouselComponent } from './componenets/carousel/carousel.component';
@@ -20,6 +20,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {AppMovieDialogComponent} from "./componenets/app-movie-dialog/app-movie-dialog.component";
 import {PersonComponent} from "./componenets/person/person.component";
 import {CastListComponent} from "./componenets/cast-list/cast-list.component";
+import {VideoModalComponent} from "./componenets/video-modal/video-modal.component";
+import {ApiKeyInterceptor} from "./interceptor/api-key.interceptor";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import {CastListComponent} from "./componenets/cast-list/cast-list.component";
     MoviesCategoryComponent,
     AppMovieDialogComponent,
     PersonComponent,
-    CastListComponent
+    CastListComponent,
+    VideoModalComponent,
+
 
   ],
   imports: [
@@ -48,8 +53,13 @@ import {CastListComponent} from "./componenets/cast-list/cast-list.component";
     HttpClientModule,
     FormsModule,
     PipeModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [MovieApiService, provideAnimationsAsync()],
+  providers: [MovieApiService, provideAnimationsAsync(),{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ApiKeyInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

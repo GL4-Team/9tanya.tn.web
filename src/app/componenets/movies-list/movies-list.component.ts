@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Movie} from "../../models/Movie/movie";
+import {MovieApi} from "../../models/movie.api";
 
 @Component({
   selector: 'app-movies-list',
@@ -10,6 +11,7 @@ export class MoviesListComponent {
   @Input() movies!: Movie[];
   @Input() category!: string;
 
+  image_base_url = MovieApi.IMAGE_BASE_URL;
   slidePosition = 0;
   slideStep = 1400;
   elementWidth=200

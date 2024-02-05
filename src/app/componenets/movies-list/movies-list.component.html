@@ -3,7 +3,7 @@
   <div class="slider-container">
     <div class="slider" [ngStyle]="{'transform': 'translateX(' + slidePosition + 'px)'}">
       <ng-container *ngFor="let movie of movies">
-        <app-movie-item [imageUrl]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" [movieId]="movie.id!"></app-movie-item>
+        <app-movie-item [imageUrl]="image_base_url + movie.poster_path" [movieId]="movie.id!"></app-movie-item>
       </ng-container>
     </div>
   </div>

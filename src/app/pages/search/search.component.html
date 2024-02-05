@@ -15,21 +15,18 @@
 
 
 
-  <div class="row mt-5">
-    <div class="col-lg-4" *ngFor="let s of searchResult">
-      <div class="row">
-        <div class="col-lg-3 mt-4 mb-4" *ngIf="s.poster_path">
-          <img
-            src="https://image.tmdb.org/t/p/original/{{ s.poster_path }}"
-            [routerLink]="['/movie',s.id]"
-          >
-        </div>
-        <div class="col-lg-9 mt-4 mb-4">
-          <h5>{{s.original_title}}</h5>
-        </div>
-      </div>
+  <div class="row mt-5" *ngIf="searchResult">
+    <div class="col-lg-2 mb-4" *ngFor="let s of searchResult; let i = index;">
+      <app-movie-item
+        [imageUrl]="image_base_url + (s.poster_path ? s.poster_path : '')"
+        [movieId]="(s.id ? s.id : 0)"
+      ></app-movie-item>
+      <!-- Add a condition to close and start a new row after every 5 elements -->
+      <div *ngIf="(i + 1) % 5 === 0" class="w-100 d-none d-lg-block"></div>
     </div>
   </div>
+
+
 
 
 

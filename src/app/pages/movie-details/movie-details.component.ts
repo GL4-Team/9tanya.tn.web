@@ -2,14 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {MovieApiService} from "../../service/movie-api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MovieDetailResponse} from "../../models/Movie-Detail/movie-detail-response";
-import {VideoDto} from "../../models/Video/video";
-import {MovieApi} from "../../models/movie.api";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {MatDialog} from "@angular/material/dialog";
-import {AppMovieDialogComponent} from "../../componenets/app-movie-dialog/app-movie-dialog.component";
 import {Cast} from "../../models/Cast/cast";
 import {Movie} from "../../models/Movie/movie";
 import {tap} from "rxjs";
+
 
 
 @Component({
@@ -20,6 +18,7 @@ import {tap} from "rxjs";
 export class MovieDetailsComponent implements OnInit{
   autoplay = '?rel=0;&autoplay=1&mute=0';
 
+
   constructor(private service:MovieApiService,
               private activatedRoute:ActivatedRoute,
               private sanitizer: DomSanitizer,
@@ -28,21 +27,22 @@ export class MovieDetailsComponent implements OnInit{
   }
 
 
-  movie: MovieDetailResponse = new MovieDetailResponse();
-  video: VideoDto = new VideoDto();
+  movie: MovieDetailResponse | null = null;
+  video!:string;
   similarMovies: Movie[] | null = null;
-
-  cast: Cast[] = []
+  showModal: boolean = false;
+  cast: Cast[]| null = null;
 
   ngOnInit() {
-    let getParamId=this.activatedRoute.snapshot.paramMap.get('id');
-    this.getMovie(getParamId);
-    this.getVideo(getParamId)
-    this.getMovieCast(getParamId)
-    this.getSimilarMovies(getParamId)
+    this.activatedRoute.data.subscribe(data => {
+      this.movie = data['movieData'];
+      this.cast = data['cast']?.cast || [];
+      this.similarMovies = data['similarMovies']?.results || [];
+
+    });
   }
 
-  openDialogMovie(video: VideoDto): void {
+  /*openDialogMovie(video: VideoDto): void {
     const videoUrl = MovieApi.BASE_URL + video.key + this.autoplay;
     const sanitizedUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
 
@@ -51,24 +51,22 @@ export class MovieDetailsComponent implements OnInit{
       width: '900px',
       data: { videoUrl: sanitizedUrl }
     });
+  }*/
+
+  openDialogMovie(): void {
+    if (!this.video) {
+      console.log("No video trailer available for this movie.");
+      return;
+    }
+    console.log("openDialog",this.video)
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
   }
 
 
-
-
-
-  getMovie(id: any) {
-    this.service.getMovieDetails(id).pipe(
-      tap(result => console.log(result, 'getmoviedetails#'))
-    ).subscribe({
-      next: (result) => {
-        this.movie = result;
-      },
-      error: (error) => {
-        console.error('Error fetching movie details:', error);
-      }
-    });
-  }
 
   getVideo(id: any) {
     this.service.getMovieVideo(id).pipe(
@@ -83,35 +81,6 @@ export class MovieDetailsComponent implements OnInit{
       },
       error: (error) => {
         console.error('Error fetching movie video:', error);
-      }
-    });
-  }
-
-
-
-  getMovieCast(id: any) {
-    this.service.getMovieCast(id).pipe(
-      tap(result => console.log(result, 'movieCast#'))
-    ).subscribe({
-      next: (result) => {
-        this.cast = result.cast;
-      },
-      error: (error) => {
-        console.error('Error fetching movie cast:', error);
-      }
-    });
-  }
-
-
-  private getSimilarMovies(id: any) {
-    this.service.getSimilarMovies(id).pipe(
-      tap(result => console.log(result, 'similar#'))
-    ).subscribe({
-      next: (result) => {
-        this.similarMovies = result.results;
-      },
-      error: (error) => {
-        console.error('Error fetching similar movies:', error);
       }
     });
   }

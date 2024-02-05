@@ -5,23 +5,24 @@
     </div>
     <div class="info">
       <div class="banner-title">{{ movie.title }}</div>
-      <div class="banner-overview"> {{movie.overview}} </div>
-
-      <a class="btn btn-md" (click)="openDialogMovie(video)">Watch Trailer</a>
+      <div class="tagline"> "{{movie.tagline}}" </div>
 
     </div>
 
   </div>
 </div>
 
+<h5 class="text-white" style="margin-left: 24px; font-size: 24px">Overview</h5>
 
-<div class="contain mt-5">
+<div class="banner-overview" *ngIf="movie">{{ movie.overview }}</div>
+
+
+<div class="contain mt-5"  *ngIf="movie">
   <div class="row p-5">
     <div class="col-lg-2">
       <img src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}">
     </div>
     <div class="col-lg-10 mt-5 p-4">
-      <h2 class="tagline">"{{ movie.tagline }}"</h2>
 
       <div class="stats">
 
@@ -91,7 +92,7 @@
 </div>
 
 
- <app-cast-list [cast]="cast"></app-cast-list>
+ <app-cast-list [cast]="cast ? cast : []"></app-cast-list>
 
 <app-movies-category [movies]="similarMovies ? similarMovies : []" [category]="'See more like this'"></app-movies-category>
 

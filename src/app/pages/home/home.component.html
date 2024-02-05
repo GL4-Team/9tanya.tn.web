@@ -1,7 +1,7 @@
 <app-carousel></app-carousel>
 
-<app-movies-category [movies]="trendingMovieResult" [category]="'Trending Movies'" ></app-movies-category>
+<app-movies-category [movies]="trendingMovieResult ? trendingMovieResult:[] " [category]="'Trending Movies'" ></app-movies-category>
 
-<app-movies-category [movies]="upcomingMovieResult" [category]="'Upcoming Movies'" ></app-movies-category>
+<app-movies-category [movies]="upcomingMovieResult ? upcomingMovieResult :[]" [category]="'Upcoming Movies'" ></app-movies-category>
 
-<app-movies-category [movies]="nowPlayingMovieResult" [category]="'Now Playing Movies'" ></app-movies-category>
+<app-movies-category [movies]="nowPlayingMovieResult ? nowPlayingMovieResult : []" [category]="'Now Playing Movies'" ></app-movies-category>

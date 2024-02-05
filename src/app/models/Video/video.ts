@@ -12,7 +12,7 @@ export class VideoDto {
   site: string = '';
   size: number = 0;
   type: string = '';
-  url: SafeResourceUrl | null = null; // Nullable url property
+  url: SafeResourceUrl | null = null;
 
   constructor(
     id: string = '',
@@ -25,7 +25,7 @@ export class VideoDto {
     site: string = '',
     size: number = 0,
     type: string = '',
-    url: string | null = null // Pass nullable url in constructor
+    url: string | null = null
   ) {
     this.id = id;
     this.iso_3166_1 = iso_3166_1;
